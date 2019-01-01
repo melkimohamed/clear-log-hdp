@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  sudo: yes
+  gather_facts: no
+  tasks:
+  - name: clear
+    with_items:
+      - { name: '/var/log/anaconda', date: '160d' }
+      - { name: '/var/log/audit', date: '1d' }
+    include_role:
+      name: clear
+    vars:
+      thing: "{{ item }}"
